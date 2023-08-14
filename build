@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+if [ $# -eq 0 ]; then
+    echo "Usage: ./build.sh <project_id>"
+    exit 1
+fi
+
+PROJ=${1}
+
+claat export -o ./site ./md/$PROJ.md

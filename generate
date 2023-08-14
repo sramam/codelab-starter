@@ -1,0 +1,77 @@
+#!/usr/bin/env sh
+
+#!/usr/bin/env sh
+
+# Assign command line arguments to variables, if they exist
+project=$1
+username=${2}
+prefix=${3}
+giturl=${4}
+
+# Check if variables are empty, and if so, prompt for them
+while [ -z "$project" ]; do
+    read -p "Enter project id: " project
+done
+
+while [ -z "$username" ]; do
+    _default=$(whoami)
+    read -p "Enter your username ($_default): " username
+    username=${username:-$_default}
+done
+
+while [ -z "$prefix" ]; do
+    _default="https://storage.googleapis.com"
+    read -p "Enter your prefix ($_default): " prefix
+    prefix=${prefix:-$_default}
+done
+
+while [ -z "$giturl" ]; do
+    _default="https://github.com/$username/$project.git"
+    read -p "Enter your giturl ($_default): " giturl
+    giturl=${giturl:-$_default}
+done
+
+# Display the values to the user for confirmation
+echo "You entered:"
+echo "  Project  : $project"
+echo "  Username : $username"
+echo "  Prefix   : $prefix"
+echo "  Git URL  : $giturl"
+
+# Ask for confirmation
+while true; do
+    read -p "Are these values correct? (yes/no): " confirm
+
+    # Check the user's response
+    case $confirm in
+        [Yy]* ) break;;      # exit the loop if user confirms
+        [Nn]* )
+            # If user denies, prompt for all values again but retain previously entered values
+            exec $0 "$project" "$username" "$prefix" "$giturl"
+            ;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+# PROJ=${1}
+
+mkdir -p md/assets/images
+cat > md/${project}.md << EOF
+author: $username
+summary: Codelabs, getting started
+id: $project
+categories: codelab, documentation
+environments: Web
+status: Published
+feedback link: https://github.com/$username/$project
+
+# A first project
+
+## Step 1
+This is step 1
+
+## Step 2
+This is step 2
+
+EOF
