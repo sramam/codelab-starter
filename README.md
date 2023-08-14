@@ -1,17 +1,15 @@
-# An Introduction to using GCP + Vertex AI
+# A codelab starter
 
-This repo documents one person's journey on coming upto speed
-with GCP and Vertex AI enroute to building a Gen AI solution.
-
+A starter repo to create your own [codelab document(s)](https://github.com/googlecodelabs/tools).
+Provides some convenience functions to get started.
 
 ## Getting started
 The documentation is built using [`claat`](https://github.com/googlecodelabs/tools/tree/main/claat), the code-labs documentation tool.
 
-### Install
-
-Requires an installation of [`go`](https://go.dev/dl/)
-
 ```sh
+PROJECT_DIR=<PROJECT_DIR>
+git clone https://github.com/sramam/codelab-starter $PROJECT_DIR
+cd $PROJECT_DIR
 ./install
 ```
 
@@ -21,19 +19,18 @@ this allows generation of the template file. Prompts for various
 fields that are configuralble
 
 ```sh
-./generate [sub_project_name] [username] []
+./generate [sub_project_name]
 ```
 
-- Add documentation in [`./md`](./md)
-- Add assets within `./md`. For example [`./md/assets/images`](./md/assets/images)
+creates ./md/[sub_project_name].md
 
 ### Build
 
 ```sh
-./build 
+./build <sub_project_name>
 ```
 
 ### Serve
 ```sh
-./serve.sh
+./serve.sh <sub_project_name>
 ```
