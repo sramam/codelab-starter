@@ -32,26 +32,24 @@ while [ -z "$giturl" ]; do
 done
 
 # Display the values to the user for confirmation
-echo "You entered:"
+
+echo "\nYou entered:"
 echo "  Project  : $project"
 echo "  Username : $username"
 echo "  Prefix   : $prefix"
-echo "  Git URL  : $giturl"
+echo "  Git URL  : $giturl\n"
 
 # Ask for confirmation
-while true; do
-    read -p "Are these values correct? (yes/no): " confirm
-
-    # Check the user's response
-    case $confirm in
-        [Yy]* ) break;;      # exit the loop if user confirms
-        [Nn]* )
-            # If user denies, prompt for all values again but retain previously entered values
-            exec $0 "$project" "$username" "$prefix" "$giturl"
-            ;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+read -p "Are these values correct? (yes/no): " confirm
+# Check the user's response
+case $confirm in
+    [Yy]* ) break;;      # exit the loop if user confirms
+    [Nn]* )
+        echo "Please try again" 
+        exit 0
+        ;;
+    * ) echo "Please answer yes or no.";;
+esac
 
 
 # PROJ=${1}
